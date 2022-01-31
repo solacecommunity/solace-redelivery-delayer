@@ -10,7 +10,7 @@ The purpose of this microservice is to implement an exponential backoff from a S
 
 2. Ensure that your configured SOURCE_QUEUE has a maximum redelivery configured:
 
-![max redelivery](queue_settings.png =100x100)
+![max redelivery](queue_settings.png)
 
 
 3. Then run `mvn spring-boot:run`
