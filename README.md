@@ -3,14 +3,14 @@
 ## Overview
 The purpose of this microservice is to implement an exponential backoff from a Solace DMQ back to the original queue.
 
-![workflow](solace-redelivery-workflow.png)
+
 
 ### Getting started quickly
-1. Edit [src/main/resource/application.properties](src/main/resources/application.properties) with values for your solace host, user and password.
+1. Edit [src/main/resource/application.properties](src/main/resources/application.properties) with values for your environment.
 
 2. Ensure that your configured SOURCE_QUEUE has a maximum redelivery configured:
 
-![max redelivery](queue_settings.png)
+![max redelivery](queue_settings.png =100x100)
 
 
 3. Then run `mvn spring-boot:run`
@@ -32,10 +32,9 @@ If a consumer fails to process a message, it is immediately sent back to the que
 This could potentially result in a DOS-like attack against the endpoint. Perhaps you want to retry processing a
 message after a certain interval, have an exponential backoff in case of further failures and have a threshold after which
 you will stop processing messages all together.
+![workflow](solace-redelivery-workflow.png)
 
-
-The diagram above describes the flow of this application. You will have a SOURCE_QUEUE, a DMQ
-(for the SOURCE_QUEUE) and an optional ERROR_QUEUE.
+The diagram above describes the flow of this application. You will have a SOURCE_QUEUE, a DMQ (for the SOURCE_QUEUE) and an optional ERROR_QUEUE.
 
 1. A message on the SOURCE_QUEUE can be redelivered N number of times before it is expired to the DMQ
 2. The redelivery delayer microservice listens to the DMQ and injects a configurable header that counts the number
