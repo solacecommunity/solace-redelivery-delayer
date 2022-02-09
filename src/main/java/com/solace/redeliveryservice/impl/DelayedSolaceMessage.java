@@ -18,7 +18,7 @@ public class DelayedSolaceMessage implements Delayed {
     private InboundMessage message;
 
     public DelayedSolaceMessage(InboundMessage message, long delayInMillis){
-        this.message = message;
+        this.message   = message;
         this.startTime = System.currentTimeMillis() + delayInMillis;
     }
 
@@ -42,7 +42,7 @@ public class DelayedSolaceMessage implements Delayed {
      * @return empty DelayedSolaceMessageObject
      */
     public static DelayedSolaceMessage createEmptyDelayedSolaceMessage(){
-        return new DelayedSolaceMessage(null,0L);
+        return new DelayedSolaceMessage(null, 0L);
     }
 
     /**
@@ -65,4 +65,5 @@ public class DelayedSolaceMessage implements Delayed {
     public int hashCode() {
         return Objects.hash(startTime, message);
     }
+    
 }
