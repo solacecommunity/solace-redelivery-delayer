@@ -3,7 +3,7 @@ package com.solace.redeliveryservice.impl;
 import com.solace.messaging.MessagingService;
 import com.solace.messaging.config.SolaceProperties;
 import com.solace.messaging.config.profile.ConfigurationProfile;
-import com.solace.redeliveryservice.api.ISolaceMessagingService;
+import com.solace.redeliveryservice.api.SolaceMessagingService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.Properties;
  * @author TKTheTechie
  */
 @Component
-public class BasicSolaceMessagingService extends ISolaceMessagingService {
+public class BasicSolaceMessagingService extends SolaceMessagingService {
 
     @Value("${solace.host}")
     private String host;
@@ -37,15 +37,13 @@ public class BasicSolaceMessagingService extends ISolaceMessagingService {
     @PostConstruct
     public void init(){
         final Properties serviceConfiguration = new Properties();
-        serviceConfiguration.setProperty(SolaceProperties.TransportLayerProperties.HOST,host);
+        serviceConfiguration.setProperty(SolaceProperties.TransportLayerProperties.HOST, host);
         serviceConfiguration.setProperty(SolaceProperties.AuthenticationProperties.SCHEME_BASIC_USER_NAME, user);
         serviceConfiguration.setProperty(SolaceProperties.AuthenticationProperties.SCHEME_BASIC_PASSWORD, password);
-        serviceConfiguration.setProperty(SolaceProperties.ServiceProperties.VPN_NAME,  vpn);
+        serviceConfiguration.setProperty(SolaceProperties.ServiceProperties.VPN_NAME, vpn);
 
         this.solaceMessagingService = MessagingService.builder(ConfigurationProfile.V1).fromProperties(serviceConfiguration).build().connect();
         super.init();
     }
-
-
 
 }
