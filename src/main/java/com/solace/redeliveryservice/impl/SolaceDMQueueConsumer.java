@@ -93,7 +93,7 @@ public class SolaceDMQueueConsumer {
         long nextDelay = getNextDelay(redelivery_count);
 
         //If within the threshold, submit for redelivery back to the source queue
-        if (nextDelay < MAXIMUM_REDELIVERY_DELAY) {
+        if (nextDelay <= MAXIMUM_REDELIVERY_DELAY) {
             if (log.isInfoEnabled()) {
                 log.info("Submitting a message to the redelivery engine with {} ms delay...", String.format("%,d", nextDelay));
             }
