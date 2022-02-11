@@ -29,7 +29,7 @@ c.s.r.api.ISolaceMessagingService        : Starting consumer on #DMQ
 ## Documentation
 
 If a consumer fails to process a message, it is immediately sent back to the queue and re-delivered back to the consumer.
-This could potentially result in a DOS-like attack against the endpoint. Perhaps you want to retry processing a
+This could potentially result in a DoS-like attack against the endpoint. Perhaps you want to retry processing a
 message after a certain interval, have an exponential backoff in case of further failures and have a threshold after which
 you will stop processing messages all together.
 ![workflow](solace-redelivery-workflow.png)

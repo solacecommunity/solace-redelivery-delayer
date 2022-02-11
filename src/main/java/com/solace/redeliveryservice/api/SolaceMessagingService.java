@@ -11,10 +11,11 @@ import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Convenience class that encapsulates Solace objects for publishing, receiving and building messages
+ * @author TKTheTechie
  */
-public abstract class ISolaceMessagingService {
+public abstract class SolaceMessagingService {
 
-    private static final Logger log = LoggerFactory.getLogger(ISolaceMessagingService.class);
+    private static final Logger log = LoggerFactory.getLogger(SolaceMessagingService.class);
 
     protected MessagingService solaceMessagingService;
 
@@ -27,11 +28,13 @@ public abstract class ISolaceMessagingService {
     @Value("${solace.redelivery.dmq.name}")
     private String SOLACE_DMQ_NAME;
 
-
     public void init(){
-        log.info("Starting consumer on {}",SOLACE_DMQ_NAME);
-        dmqReceiver  = solaceMessagingService.createPersistentMessageReceiverBuilder().build(Queue.durableExclusiveQueue(SOLACE_DMQ_NAME)).start();
-        publisher = solaceMessagingService.createPersistentMessagePublisherBuilder().build().start();
+        if (log.isInfoEnabled()) {
+            log.info("Start consuming from {}...", SOLACE_DMQ_NAME);
+        }
+
+        dmqReceiver    = solaceMessagingService.createPersistentMessageReceiverBuilder().build(Queue.durableExclusiveQueue(SOLACE_DMQ_NAME)).start();
+        publisher      = solaceMessagingService.createPersistentMessagePublisherBuilder().build().start();
         messageBuilder = solaceMessagingService.messageBuilder();
     }
 
@@ -39,18 +42,31 @@ public abstract class ISolaceMessagingService {
         return this.getSolaceMessagingService();
     }
 
-
+    /**
+     * Returns DMQ message receiver.
+     * 
+     * @return - DMQ message receiver.
+     */
     public PersistentMessageReceiver getDmqReceiver() {
         return dmqReceiver;
     }
 
-
+    /**
+     * Returns the publisher instance for sending the delay message back to the source queue.
+     * 
+     * @return - message publisher.
+     */
     public PersistentMessagePublisher getPublisher() {
         return publisher;
     }
 
-    public OutboundMessageBuilder getMessageBuilder() {return messageBuilder;}
-
-
+    /**
+     * Returns the message builder instance.
+     * 
+     * @return - message builder.
+     */
+    public OutboundMessageBuilder getMessageBuilder() {
+        return messageBuilder;
+    }
 
 }
