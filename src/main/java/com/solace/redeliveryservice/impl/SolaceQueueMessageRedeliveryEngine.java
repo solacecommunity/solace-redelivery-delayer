@@ -5,7 +5,7 @@ import com.solace.messaging.receiver.InboundMessage;
 import com.solace.messaging.resources.Topic;
 import com.solace.redeliveryservice.api.IRedeliveryEngine;
 import com.solace.redeliveryservice.api.SolaceMessagingService;
-import com.solace.redeliveryservice.api.WriteableQueue;
+import com.solace.redeliveryservice.api.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +52,7 @@ public class SolaceQueueMessageRedeliveryEngine implements IRedeliveryEngine<Del
     public void init() {
 
         // Using the Queue's Topic here
-        SOURCE_SOLACE_QUEUE = WriteableQueue.of(SOURCE_SOLACE_QUEUE_NAME);
+        SOURCE_SOLACE_QUEUE = Queue.of(SOURCE_SOLACE_QUEUE_NAME);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         executorService.submit(() -> {

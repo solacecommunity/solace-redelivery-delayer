@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Convenience class that encapsulates Solace objects for publishing, receiving and building messages
+ * @author TKTheTechie
  */
 public abstract class SolaceMessagingService {
 

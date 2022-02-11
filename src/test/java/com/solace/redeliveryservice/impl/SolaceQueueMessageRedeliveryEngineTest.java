@@ -8,7 +8,7 @@ import com.solace.messaging.receiver.InboundMessage;
 import com.solace.messaging.receiver.PersistentMessageReceiver;
 import com.solace.messaging.resources.Topic;
 import com.solace.redeliveryservice.api.SolaceMessagingService;
-import com.solace.redeliveryservice.api.WriteableQueue;
+import com.solace.redeliveryservice.api.Queue;
 
 import org.junit.jupiter.api.*;
 import org.mockito.*;
@@ -43,7 +43,7 @@ public class SolaceQueueMessageRedeliveryEngineTest {
         closeable = MockitoAnnotations.openMocks(this);
         ReflectionTestUtils.setField(sqmrde, "REDELIVERY_HEADER_NAME", "sol_rx_delivery_count");
         ReflectionTestUtils.setField(sqmrde, "SOURCE_SOLACE_QUEUE_NAME", "SOURCE_QUEUE");
-        ReflectionTestUtils.setField(sqmrde, "SOURCE_SOLACE_QUEUE", WriteableQueue.of("SOURCE_QUEUE"));
+        ReflectionTestUtils.setField(sqmrde, "SOURCE_SOLACE_QUEUE", Queue.of("SOURCE_QUEUE"));
 
         inboundMessage         = Mockito.mock(InboundMessage.class);
         outboundMessageBuilder = Mockito.mock(OutboundMessageBuilder.class);

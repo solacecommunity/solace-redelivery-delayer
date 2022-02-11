@@ -5,7 +5,7 @@ import com.solace.messaging.receiver.InboundMessage;
 import com.solace.messaging.resources.Topic;
 import com.solace.redeliveryservice.api.IRedeliveryEngine;
 import com.solace.redeliveryservice.api.SolaceMessagingService;
-import com.solace.redeliveryservice.api.WriteableQueue;
+import com.solace.redeliveryservice.api.Queue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +54,7 @@ public class SolaceDMQueueConsumer {
      */
     @PostConstruct
     public void init() {
-        ERROR_QUEUE = WriteableQueue.of(ERROR_QUEUE_NAME);
+        ERROR_QUEUE = Queue.of(ERROR_QUEUE_NAME);
         solaceMessagingService.getDmqReceiver().receiveAsync(this::processMessage);
     }
 

@@ -4,6 +4,7 @@ import java.util.concurrent.Delayed;
 
 /**
  * An interface for an engine that should redeliver messages after a given delay.
+ * @author TKTheTechie
  */
 public interface IRedeliveryEngine<T extends Delayed> {
 
