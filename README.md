@@ -1,3 +1,6 @@
+| NOTICE | This project has been archived in favor of using the built in Delayed Redelivery feature in the broker itself: https://docs.solace.com/API/API-Developer-Guide/Delayed-Redelivery.htm |
+| --- | --- |
+
 # SOLACE REDELIVERY DELAYER 
 
 ## Overview
